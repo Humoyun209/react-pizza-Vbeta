@@ -13,7 +13,6 @@ const Catalog = ({ pizzas }) => {
       <div className="grid grid-cols-1 justify-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {pizzas.map((elem) => {
           const bask = dataCart.find((pr) => pr.title === elem.title);
-          console.log(bask);
           return (
             <Card
               image={elem.imageUrl}

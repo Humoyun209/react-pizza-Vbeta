@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import { BasketContext } from "../context/BasketContext";
-
 const getProductPrice = (product_id, products) => {
   return products.filter((elem) => {
     elem.id === product_id;
@@ -25,11 +22,23 @@ const changeStateCart = (basketList) => {
     (acc, cur) => acc + cur.quantity,
     0
   );
-  
+
   return {
     sumPriceInBasket,
-    sumQuantityInBasket
-  }
+    sumQuantityInBasket,
+  };
 };
 
-export { checkCart, getProductPrice, changeStateCart };
+const getPageNumber = (param) => {
+  let page = "";
+  for (let num of param.split("=")[1]) {
+    if (num == parseInt(num)) {
+      page = page + num;
+    } else {
+      break;
+    }
+  }
+  return parseInt(page);
+};
+
+export { checkCart, getProductPrice, changeStateCart, getPageNumber };

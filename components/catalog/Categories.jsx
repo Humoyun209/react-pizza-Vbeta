@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import CategoryButton from "../UI/CategoryButton";
 import SortDown from "./SortDown";
 import { categories } from "../../pizza";

@@ -2,11 +2,8 @@ import { Fragment, useContext, useEffect, useReducer, useState } from "react";
 import Catalog from "../components/catalog/Catalog";
 import Categories from "../components/catalog/Categories";
 import Navbar from '../components/catalog/Navbar'
-import axios from "axios";
-import { pizza_url } from "../router";
 import { pizza_json } from "../pizza";
 import { FilterContext } from "../context/FilterContext";
-import { sorts } from "../pizza";
 
 const CatalogPage = () => {
   const context = useContext(FilterContext)
@@ -15,6 +12,7 @@ const CatalogPage = () => {
   const[filterdPizza, setFilteredPizza] = useState(pizzas)
 
   let {sortId, category} = context
+
 
   useEffect( () => {
     let data = [...pizzas]
@@ -47,9 +45,6 @@ const CatalogPage = () => {
 
     setFilteredPizza(data)
   }, [category, sortId])
-
-  
-
   
   return (
     <Fragment>
