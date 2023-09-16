@@ -41,4 +41,34 @@ const getPageNumber = (param) => {
   return parseInt(page);
 };
 
-export { checkCart, getProductPrice, changeStateCart, getPageNumber };
+const getDataByPage = (page, data) => {
+  const FILTER_PAGE = 4;
+  const start = (page - 1) * FILTER_PAGE;
+  const finish = page * FILTER_PAGE;
+  const aa = data.filter((elem, index) => {
+    return index >= start && index < finish;
+  });
+
+  return aa
+};
+
+const getPagination = (data) => {
+  const len = Math.floor(data.length / 4) + 1;
+  const pageNumber = [];
+
+  for (let i = 1; i <= len; i++) {
+    pageNumber.push({
+      num: i,
+    });
+  }
+  return pageNumber;
+};
+
+export {
+  checkCart,
+  getProductPrice,
+  changeStateCart,
+  getPageNumber,
+  getDataByPage,
+  getPagination,
+};

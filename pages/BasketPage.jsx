@@ -6,6 +6,7 @@ import Navbar from "../components/catalog/Navbar";
 import { BasketContext } from "../context/BasketContext";
 import { changeStateCart } from "../service/service";
 import NotFound from "../components/cart/NotFound";
+import PaginationButton from "../components/UI/PaginationButton";
 
 const BasketPage = () => {
   const { dataCart, sumQuantity, sumPrice, setSumQuantity, setSumPrice } =
