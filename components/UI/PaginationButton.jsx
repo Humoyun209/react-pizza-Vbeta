@@ -1,16 +1,21 @@
-import React from "react";
-
-const PaginationButton = ({ children, indexPage, currentPage, page, setPage, name, length }) => {
-
+const PaginationButton = ({
+  children,
+  indexPage,
+  currentPage,
+  page,
+  setPage,
+  name,
+  length,
+}) => {
   const handleSetPage = () => {
-    if (name == 'gt' && currentPage !== length) {
-      setPage(currentPage+1)
-    } else if (name == 'lt' && currentPage !== 1){
-      setPage(currentPage - 1)
-    } else if (page !== indexPage){
-      setPage(page)
+    if (name == "gt" && currentPage !== length) {
+      setPage(currentPage + 1);
+    } else if (name == "lt" && currentPage !== 1) {
+      setPage(currentPage - 1);
+    } else if (page !== indexPage) {
+      setPage(page);
     }
-  }
+  };
   return (
     <button
       onClick={handleSetPage}

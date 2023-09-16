@@ -2,7 +2,7 @@ import PaginationButton from "../UI/PaginationButton";
 
 const Pagination = ({ numbers, indexPage, setPage }) => {
   return (
-    <div className=" flex gap-[5px] mt-[70px] ml-[50px]">
+    <div className="flex gap-[5px] mt-[70px] ml-[50px]">
       <PaginationButton 
        name="lt"
        currentPage={indexPage} 

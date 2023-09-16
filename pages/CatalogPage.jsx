@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useReducer, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import Catalog from "../components/catalog/Catalog";
 import Categories from "../components/catalog/Categories";
 import Navbar from "../components/catalog/Navbar";
@@ -6,48 +6,31 @@ import { pizza_json } from "../pizza";
 import { FilterContext } from "../context/FilterContext";
 import Pagination from "../components/catalog/Pagination";
 import { getDataByPage, getPagination } from "../service/service";
+import { filterByCategory, filterByParams } from "../service/filters";
 
 const CatalogPage = () => {
   const context = useContext(FilterContext);
+  const { sortId, category } = context;
+
   const [filteredPizza, setFilteredPizza] = useState(pizza_json);
-  const [page, setPage] = useState(1);
   const [pageData, setPageData] = useState(pizza_json)
 
-  let { sortId, category } = context;
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     let data = [...pizza_json];
 
-    data = data.filter((elem) => elem.category === category)
+    data = filterByCategory(data, category, pizza_json)
+    data = filterByParams(data, sortId)
 
-    if (context.category === 6) {
-      data = [...pizza_json];
-    }
-
-    if (sortId === 0) {
-      data.sort((a, b) => {
-        return b.rating - a.rating;
-      });
-    }
-
-    if (sortId === 1) {
-      data.sort((a, b) => {
-        return a.price - b.price;
-      });
-    }
-
-    if (sortId === 2) {
-      data.sort((a, b) => {
-        return a.title.localeCompare(b.title);
-      });
-    }
-
-    if (category !== 6) {
-      setPage(1)
-    }
     setFilteredPizza(data)
 
     data = getDataByPage(page, [...data]);
+
+    if (!data.length) {
+      setPage(1)
+    }
+
     setPageData(data)
 
   }, [category, sortId, page]);
@@ -64,7 +47,7 @@ const CatalogPage = () => {
           setPage={setPage}
         />
       ) : (
-        <></>
+        <div className="mt-[90px]"></div>
       )}
     </Fragment>
   );
