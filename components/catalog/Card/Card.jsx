@@ -3,11 +3,11 @@ import {
   nativeSizes,
   buttonsCardStyles,
   nativeTypes,
-} from "../data-components/cardData";
-import CardButton from "../UI/CardButton";
-import { BasketContext } from "../../context/BasketContext";
-import { checkCart } from "../../service/service";
-import { changeStateCart } from "../../service/service";
+} from "./cardData";
+import CardButton from "../../UI/CardButton";
+import { BasketContext } from "../../../context/BasketContext";
+import { checkCart } from "../../../service/service";
+import { changeStateCart } from "../../../service/service";
 
 const Card = ({ image, title, price, sizes, types, prBask}) => {
 

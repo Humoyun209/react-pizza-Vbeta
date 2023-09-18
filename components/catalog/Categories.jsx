@@ -1,19 +1,28 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CategoryButton from "../UI/CategoryButton";
 import SortDown from "./SortDown";
 import { categories } from "../../pizza";
 import { FilterContext } from "../../context/FilterContext";
+import { useSearchParams } from "react-router-dom";
+import { createOrSetQueryParam } from "../../service/filters";
 
 const Categories = () => {
-  const context = useContext(FilterContext);
+  const {setCategory, category} = useContext(FilterContext);
+  
+  const [params, setParams] = useSearchParams()
+  useEffect(() => {
+    setParams(() => {
+      return createOrSetQueryParam(params, category, 'category')
+  })
+  }, [category])
 
   return (
     <section className="mt-[94px] flex justify-between items-center flex-col lg:flex-row gap-5">
       <div className="flex justify-start gap-[8.95px] flex-wrap">
         {categories.map((elem) => (
           <CategoryButton
-            handleClick={() => context.setCategory(elem.id)}
-            cat={context.category}
+            handleClick={() => {setCategory(elem.id)}}
+            cat={category}
             key={elem.id}
             ind={elem.id}
           >

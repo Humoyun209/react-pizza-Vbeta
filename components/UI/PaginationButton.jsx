@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+
 const PaginationButton = ({
   children,
   indexPage,
@@ -7,6 +10,7 @@ const PaginationButton = ({
   name,
   length,
 }) => {
+
   const handleSetPage = () => {
     if (name == "gt" && currentPage !== length) {
       setPage(currentPage + 1);
@@ -16,6 +20,7 @@ const PaginationButton = ({
       setPage(page);
     }
   };
+
   return (
     <button
       onClick={handleSetPage}

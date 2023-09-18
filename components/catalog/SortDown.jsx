@@ -1,16 +1,25 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { sorts } from "../../pizza";
 import { FilterContext } from "../../context/FilterContext";
+import { useSearchParams } from "react-router-dom";
+import { createOrSetQueryParam } from "../../service/filters";
 
 const SortDown = () => {
   const [openList, setOpenList] = useState(false);
   const context = useContext(FilterContext);
   const { sortId, setSortId } = context;
+  const [params, setParams] = useSearchParams()
 
   const handleChangeSort = (event) => {
     setOpenList(false);
     setSortId(parseInt(event.target.dataset.index));
   };
+
+  useEffect(() => {
+    setParams(() => {
+      return createOrSetQueryParam(params, sorts[sortId].name, 'sortBy')
+    })
+  }, [sortId])
 
   return (
     <div style={{ marginRight: "50px" }}>
@@ -28,27 +37,18 @@ const SortDown = () => {
             : "hidden"
         }`}
       >
-        <span
-          onClick={handleChangeSort}
-          data-index={0}
-          className="pl-[5px] cursor-pointer py-[11px] text-[14px] tracking-normal leading-[17.05px] text-[#000000] text-start hover:font-bold hover:text-[#FE5F1E] hover:bg-[#fff7f3]"
-        >
-          популярности
-        </span>
-        <span
-          onClick={handleChangeSort}
-          data-index={1}
-          className="pl-[5px] cursor-pointer py-[11px] text-[14px] tracking-normal leading-[17.05px] text-[#000000] text-start hover:font-bold hover:text-[#FE5F1E] hover:bg-[#fff7f3]"
-        >
-          по цене
-        </span>
-        <span
-          onClick={handleChangeSort}
-          data-index={2}
-          className="pl-[5px] cursor-pointer py-[11px] text-[14px] tracking-normal leading-[17.05px] text-[#000000] text-start hover:font-bold hover:text-[#FE5F1E] hover:bg-[#fff7f3]"
-        >
-          по алфавиту
-        </span>
+        {
+          sorts.map((elem) => (
+             <span
+              onClick={handleChangeSort}
+              data-index={elem.id}
+              className="pl-[5px] cursor-pointer py-[11px] text-[14px] tracking-normal leading-[17.05px] text-[#000000] text-start hover:font-bold hover:text-[#FE5F1E] hover:bg-[#fff7f3]"
+            >
+              {elem.name}
+            </span>
+          ))
+        }
+       
       </div>
     </div>
   );

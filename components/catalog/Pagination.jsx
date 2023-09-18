@@ -1,6 +1,17 @@
 import PaginationButton from "../UI/PaginationButton";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { createOrSetQueryParam } from "../../service/filters";
 
 const Pagination = ({ numbers, indexPage, setPage }) => {
+  const [params, setParams] = useSearchParams();
+
+  useEffect(() => {
+    setParams(() => {
+      return createOrSetQueryParam(params, indexPage, 'page')
+    })
+  }, [indexPage])
+
   return (
     <div className="flex gap-[5px] mt-[70px] ml-[50px]">
       <PaginationButton 

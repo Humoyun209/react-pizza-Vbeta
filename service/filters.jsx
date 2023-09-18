@@ -18,4 +18,13 @@ const filterByParams = (data, sortId) => {
   return data;
 };
 
-export { filterByCategory, filterByParams };
+const createOrSetQueryParam = (params, query, name) => {
+  if (!params.has(name)) {
+    params.append(name, query)
+  } else {
+    params.set(name, query)
+  }
+  return params
+}
+
+export { filterByCategory, filterByParams, createOrSetQueryParam };
