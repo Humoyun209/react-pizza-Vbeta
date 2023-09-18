@@ -7,7 +7,7 @@
 
 **The following functionality is made in the project:**
 - Adding, removing goods from the basket
-- Filtering by category, by price, by rating and alphabetically
+- Filtering by category, by price, by rating and by alphabet
 - Pagination with React hooks
 
 **To run applications:**
