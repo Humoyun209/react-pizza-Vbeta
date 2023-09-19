@@ -24,7 +24,7 @@ const BasketPage = () => {
 
   return (
     <Fragment>
-       <Navbar />
+      <Navbar />
       {dataCart.length ? (
         <Fragment>
           <HeaderBasket />
