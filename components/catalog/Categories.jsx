@@ -22,7 +22,7 @@ const Categories = () => {
         {categories.map((elem) => (
           <CategoryButton
             handleClick={() => {setCategory(elem.id)}}
-            cat={category}
+            cat={parseInt(params.get('category')) >= 0 ? parseInt(params.get('category')) : category}
             key={elem.id}
             ind={elem.id}
           >

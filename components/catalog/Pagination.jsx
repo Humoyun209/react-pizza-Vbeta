@@ -37,7 +37,6 @@ const Pagination = ({ numbers, indexPage, setPage }) => {
           return (
             <PaginationButton
               key={elem.num}
-              indexPage={null}
               page={elem.num}
               setPage={setPage}
             >

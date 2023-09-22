@@ -7,15 +7,21 @@ import { FilterContext } from "../context/FilterContext";
 import Pagination from "../components/catalog/Pagination";
 import { getDataByPage, getPagination } from "../service/service";
 import { filterByCategory, filterByParams } from "../service/filters";
+import { useSearchParams } from "react-router-dom";
 
 const CatalogPage = () => {
-  const context = useContext(FilterContext);
-  const { sortId, category } = context;
+  const { sortId, category } = useContext(FilterContext);
+  const [params, setParams] = useSearchParams()
 
   const [filteredPizza, setFilteredPizza] = useState(pizza_json);
   const [pageData, setPageData] = useState(pizza_json)
 
+
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setPage(params.get('page') ? parseInt(params.get('page')) : 1)
+  }, [])
 
   useEffect(() => {
     let data = [...pizza_json];
